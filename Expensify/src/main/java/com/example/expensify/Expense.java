@@ -23,7 +23,8 @@ public class Expense {
 
   public Expense() {}
 
-  public Expense(String merchant, String description, LocalDate purchaseDate, double amount, Status status) {
+  public Expense(
+      String merchant, String description, LocalDate purchaseDate, double amount, Status status) {
     this.merchant = merchant;
     this.description = description;
     this.purchaseDate = purchaseDate;
@@ -50,5 +51,4 @@ public class Expense {
   public Status getStatus() {
     return this.status;
   }
-
 }
