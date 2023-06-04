@@ -1,8 +1,8 @@
 spring:
     datasource:
         url: jdbc:postgresql://localhost:5432/expensify
-        username: abby
-        password: lemon%phant4
+        username: <USERNAME>
+        password: <PASSWORD>
     jpa:
         hibernate:
             ddl-auto: create-drop
