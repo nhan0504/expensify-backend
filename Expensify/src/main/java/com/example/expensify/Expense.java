@@ -40,12 +40,17 @@ public class Expense {
     return this.merchant;
   }
 
+
   public String getDescription() {
     return this.description;
   }
 
   public LocalDate getPurchaseDate() {
     return this.purchaseDate;
+  }
+
+  public double getAmount() {
+    return amount;
   }
 
   public Status getStatus() {
