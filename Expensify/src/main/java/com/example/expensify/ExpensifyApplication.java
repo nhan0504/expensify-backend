@@ -1,4 +1,4 @@
-package com.example.Expensify;
+package com.example.expensify;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
