@@ -1,4 +1,4 @@
-package com.example.Expensify;
+package com.example.expensify;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,49 +14,39 @@ public class Status {
 
     private State state;
 
-    private String reviewed_by;
+    private String reviewedBy;
 
-    private String review_date;
+    private String reviewDate;
 
     private String comment;
 
-    public Long getId() {
-        return id;
+    public Status() {}
+
+    public Status(State state, String reviewedBy, String reviewDate, String comment) {
+        this.state = state;
+        this.reviewedBy = reviewedBy;
+        this.reviewDate = reviewDate;
+        this.comment = comment;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getId() {
+        return this.id;
     }
 
     public State getState() {
-        return state;
+        return this.state;
     }
 
-    public void setState(State state) {
-        this.state = state;
+    public String getReviewedBy() {
+        return this.reviewedBy;
     }
 
-    public String getReviewed_by() {
-        return reviewed_by;
-    }
-
-    public void setReviewed_by(String reviewed_by) {
-        this.reviewed_by = reviewed_by;
-    }
-
-    public String getReview_date() {
-        return review_date;
-    }
-
-    public void setReview_date(String review_date) {
-        this.review_date = review_date;
+    public String getReviewDate() {
+        return this.reviewDate;
     }
 
     public String getComment() {
-        return comment;
+        return this.comment;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
 }
