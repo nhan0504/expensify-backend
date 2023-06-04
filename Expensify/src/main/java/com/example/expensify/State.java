@@ -1,6 +1,6 @@
-package com.example.Expensify;
+package com.example.expensify;
 
-enum State {
+public enum State {
     IN_REVIEW,
     APPROVED,
     REJECTED
