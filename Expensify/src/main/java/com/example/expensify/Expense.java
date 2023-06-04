@@ -40,7 +40,6 @@ public class Expense {
     return this.merchant;
   }
 
-
   public String getDescription() {
     return this.description;
   }
