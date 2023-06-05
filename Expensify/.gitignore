@@ -38,3 +38,6 @@ out/
 
 ### CMD ###
 init.cmd
+
+### ENV ###
+.env

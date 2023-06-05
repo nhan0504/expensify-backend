@@ -1,4 +1,4 @@
-package com.example.expensify;
+package com.example.expensify.entity;
 
 public enum State {
   IN_REVIEW,
