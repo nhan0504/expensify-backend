@@ -49,7 +49,7 @@ public class Expense {
   }
 
   public double getAmount() {
-    return amount;
+    return this.amount;
   }
 
   public Status getStatus() {
