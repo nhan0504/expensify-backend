@@ -23,7 +23,7 @@ public class Expense {
 
   protected Expense() {}
 
-  public Expense(Builder builder) {
+  private Expense(Builder builder) {
     this.merchant = builder.merchant;
     this.description = builder.description;
     this.purchaseDate = builder.purchaseDate;
@@ -70,42 +70,32 @@ public class Expense {
 
     private Status status;
 
-    public Builder Builder() {
-      this.merchant = "";
-      this.description = "";
-      this.purchaseDate = LocalDate.now();
-      this.amount = 0;
-      this.status = null;
+    public Builder merchant(String merchant) {
+      this.merchant = merchant;
       return this;
     }
 
-    public void merchant(String merchant) {
-      this.merchant = merchant;
-    }
-
-    public void description(String description) {
+    public Builder description(String description) {
       this.description = description;
+      return this;
     }
 
-    public void purchaseDate(LocalDate purchaseDate) {
+    public Builder purchaseDate(LocalDate purchaseDate) {
       this.purchaseDate = purchaseDate;
+      return this;
     }
 
-    public void amount(double amount) {
+    public Builder amount(double amount) {
       this.amount = amount;
+      return this;
     }
 
-    public void status(Status status) {
+    public Builder status(Status status) {
       this.status = status;
+      return this;
     }
 
     public Expense build() {
-      if (this.merchant.equals("")) {
-        throw new RuntimeException("Merchant name cannot be empty");
-      }
-      if (this.status == null) {
-        throw new RuntimeException("Have to set status");
-      }
       return new Expense(this);
     }
   }

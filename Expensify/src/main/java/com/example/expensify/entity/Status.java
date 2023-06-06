@@ -22,7 +22,7 @@ public class Status {
 
   protected Status() {}
 
-  public Status(Builder builder) {
+  private Status(Builder builder) {
     this.state = builder.state;
     this.reviewedBy = builder.reviewedBy;
     this.reviewDate = builder.reviewDate;
@@ -62,34 +62,27 @@ public class Status {
 
     private String comment;
 
-    public Builder Builder() {
-      this.state = State.IN_REVIEW;
-      this.reviewedBy = "";
-      this.reviewDate = LocalDate.now();
-      this.comment = "";
+    public Builder state(State state) {
+      this.state = state;
       return this;
     }
 
-    public void state(State state) {
-      this.state = state;
-    }
-
-    public void reviewedBy(String reviewedBy) {
+    public Builder reviewedBy(String reviewedBy) {
       this.reviewedBy = reviewedBy;
+      return this;
     }
 
-    public void reviewDate(LocalDate reviewDate) {
+    public Builder reviewDate(LocalDate reviewDate) {
       this.reviewDate = reviewDate;
+      return this;
     }
 
-    public void comment(String comment) {
+    public Builder comment(String comment) {
       this.comment = comment;
+      return this;
     }
 
     public Status build() {
-      if (this.reviewedBy.equals("")) {
-        throw new RuntimeException("ReviewBy name cannot be empty");
-      }
       return new Status(this);
     }
   }
