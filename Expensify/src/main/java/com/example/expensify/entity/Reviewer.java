@@ -16,14 +16,14 @@ public class Reviewer extends ExpensifyUser {
 
   private String password;
 
-  private SimpleGrantedAuthority role;
+  private Role role;
 
   protected Reviewer() {}
 
-  public Reviewer(String username, String password, String role) {
+  public Reviewer(String username, String password, Role role) {
     this.username = username;
     this.password = password;
-    this.role = new SimpleGrantedAuthority(role);
+    this.role = role;
   }
 
   public Long getId() {
@@ -42,6 +42,6 @@ public class Reviewer extends ExpensifyUser {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return Collections.singleton(this.role);
+    return Collections.singleton(new SimpleGrantedAuthority(this.role.toString()));
   }
 }
