@@ -9,8 +9,9 @@ import java.util.Collections;
 
 public abstract class ExpensifyUser implements UserDetails {
 
-  public Collection<? extends GrantedAuthority> getAuthorities(){
-          return Collections.singleton(new SimpleGrantedAuthority(""));};
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return Collections.singleton(new SimpleGrantedAuthority(""));
+  }
 
   public abstract String getPassword();
 
