@@ -35,3 +35,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### CMD ###
+init.cmd
+
+### ENV ###
+.env

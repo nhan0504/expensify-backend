@@ -1,4 +1,4 @@
-package com.example.Expensify;
+package com.example.expensify;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
