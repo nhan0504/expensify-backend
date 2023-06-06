@@ -1,10 +1,10 @@
 package com.example.expensify.entity;
 
 import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -23,13 +23,14 @@ public class Employee extends ExpensifyUser {
 
   private String password;
 
-  private SimpleGrantedAuthority roles;
+  private SimpleGrantedAuthority role;
 
   protected Employee() {}
 
-  public Employee(String username, String password) {
+  public Employee(String username, String password, String role) {
     this.username = username;
     this.password = password;
+    this.role = new SimpleGrantedAuthority(role);
   }
 
   public Long getId() {
@@ -51,7 +52,7 @@ public class Employee extends ExpensifyUser {
   }
 
   @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    return this.roles;
+  public Collection<SimpleGrantedAuthority> getAuthorities() {
+    return Collections.singleton(this.role);
   }
 }

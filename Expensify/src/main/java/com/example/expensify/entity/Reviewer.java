@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 @Table(name = "reviewers")
@@ -15,13 +16,14 @@ public class Reviewer extends ExpensifyUser {
 
   private String password;
 
-  private SimpleGrantedAuthority roles;
+  private SimpleGrantedAuthority role;
 
   protected Reviewer() {}
 
-  public Reviewer(String username, String password) {
+  public Reviewer(String username, String password, String role) {
     this.username = username;
     this.password = password;
+    this.role = new SimpleGrantedAuthority(role);
   }
 
   public Long getId() {
@@ -40,6 +42,6 @@ public class Reviewer extends ExpensifyUser {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return this.roles;
+    return Collections.singleton(this.role);
   }
 }
