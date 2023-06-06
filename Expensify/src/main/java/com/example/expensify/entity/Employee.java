@@ -1,7 +1,10 @@
 package com.example.expensify.entity;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -20,9 +23,7 @@ public class Employee extends ExpensifyUser {
 
   private String password;
 
-  @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "employee_id")
-  private List<Role> roles;
+  private SimpleGrantedAuthority roles;
 
   protected Employee() {}
 
@@ -50,7 +51,7 @@ public class Employee extends ExpensifyUser {
   }
 
   @Override
-  public List<Role> getAuthorities() {
+  public Collection<? extends GrantedAuthority> getAuthorities() {
     return this.roles;
   }
 }
