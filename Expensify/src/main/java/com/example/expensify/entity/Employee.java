@@ -1,10 +1,7 @@
 package com.example.expensify.entity;
 
 import jakarta.persistence.*;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -28,6 +25,7 @@ public class Employee extends ExpensifyUser {
   protected Employee() {}
 
   public Employee(String username, String password, Role role) {
+    super(username, password, role);
     this.username = username;
     this.password = password;
     this.role = role;
@@ -39,20 +37,5 @@ public class Employee extends ExpensifyUser {
 
   public List<Expense> getExpenses() {
     return this.expenses;
-  }
-
-  @Override
-  public String getUsername() {
-    return this.username;
-  }
-
-  @Override
-  public String getPassword() {
-    return this.password;
-  }
-
-  @Override
-  public Collection<SimpleGrantedAuthority> getAuthorities() {
-    return Collections.singleton(new SimpleGrantedAuthority(this.role.toString()));
   }
 }

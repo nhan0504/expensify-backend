@@ -9,13 +9,34 @@ import java.util.Collections;
 
 public abstract class ExpensifyUser implements UserDetails {
 
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    return Collections.singleton(new SimpleGrantedAuthority(""));
+  protected String username;
+
+  protected String password;
+
+  protected Role role;
+
+  protected ExpensifyUser() {}
+
+  protected ExpensifyUser(String username, String password, Role role) {
+    this.username = username;
+    this.password = password;
+    this.role = role;
   }
 
-  public abstract String getPassword();
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return Collections.singleton(new SimpleGrantedAuthority(this.role.toString()));
+  }
 
-  public abstract String getUsername();
+  @Override
+  public String getPassword() {
+    return this.password;
+  }
+
+  @Override
+  public String getUsername() {
+    return this.username;
+  }
 
   @Override
   public boolean isAccountNonExpired() {
