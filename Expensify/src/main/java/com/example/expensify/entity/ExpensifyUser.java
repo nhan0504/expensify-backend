@@ -9,11 +9,11 @@ import java.util.Collections;
 
 public abstract class ExpensifyUser implements UserDetails {
 
-  protected String username;
+  private String username;
 
-  protected String password;
+  private String password;
 
-  protected Role role;
+  private Role role;
 
   protected ExpensifyUser() {}
 
