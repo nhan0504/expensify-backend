@@ -11,6 +11,7 @@ public class Reviewer extends ExpensifyUser {
 
   private String password;
 
+  @Enumerated(EnumType.STRING)
   private Role role;
 
   protected Reviewer() {}
