@@ -7,20 +7,10 @@ import jakarta.persistence.*;
 public class Reviewer extends ExpensifyUser {
   @Id @GeneratedValue private Long id;
 
-  private String username;
-
-  private String password;
-
-  @Enumerated(EnumType.STRING)
-  private Role role;
-
   protected Reviewer() {}
 
   public Reviewer(String username, String password, Role role) {
     super(username, password, role);
-    this.username = username;
-    this.password = password;
-    this.role = role;
   }
 
   public Long getId() {
