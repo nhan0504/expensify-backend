@@ -1,8 +1,6 @@
 package com.example.expensify.entity;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +10,8 @@ import java.util.Collections;
 
 @MappedSuperclass
 public abstract class ExpensifyUser implements UserDetails {
+
+  @Id @GeneratedValue private Long id;
 
   private String username;
 
@@ -26,6 +26,10 @@ public abstract class ExpensifyUser implements UserDetails {
     this.username = username;
     this.password = password;
     this.role = role;
+  }
+
+  public Long getId() {
+    return this.id;
   }
 
   @Override
