@@ -1,9 +1,7 @@
 package com.example.expensify.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -12,6 +10,7 @@ import java.time.LocalDate;
 public class Status {
   @Id @GeneratedValue private Long id;
 
+  @Enumerated(EnumType.STRING)
   private State state;
 
   private String reviewedBy;
@@ -49,7 +48,7 @@ public class Status {
     return this.comment;
   }
 
-  public Builder builder() {
+  public static Builder builder() {
     return new Builder();
   }
 

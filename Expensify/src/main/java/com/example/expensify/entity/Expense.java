@@ -55,7 +55,7 @@ public class Expense {
     return this.status;
   }
 
-  public Builder builder() {
+  public static Builder builder() {
     return new Builder();
   }
 
