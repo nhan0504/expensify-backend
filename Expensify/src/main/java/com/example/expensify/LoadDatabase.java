@@ -1,5 +1,10 @@
-package com.example.expensify.entity;
+package com.example.expensify;
 
+import com.example.expensify.entity.*;
+import com.example.expensify.repository.EmployeeRepository;
+import com.example.expensify.repository.ExpenseRepository;
+import com.example.expensify.repository.ReviewerRepository;
+import com.example.expensify.repository.StatusRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
