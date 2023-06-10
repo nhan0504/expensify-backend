@@ -56,4 +56,9 @@ public class EmployeeController {
     expenseRepository.delete(expense);
     return expense;
   }
+
+  @GetMapping("/employees")
+  public List<Employee> get_all_employees() {
+    return employeeRepository.findAll();
+  }
 }
