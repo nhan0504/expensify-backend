@@ -48,6 +48,8 @@ public class Status {
     return this.comment;
   }
 
+  public void setState(State state) { this.state = state; }
+
   public static Builder builder() {
     return new Builder();
   }
