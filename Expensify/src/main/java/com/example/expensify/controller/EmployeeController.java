@@ -31,7 +31,7 @@ public class EmployeeController {
   }
 
   @PostMapping("/employees/{employee_id}/expenses")
-  public Expense get_employee_expenses(
+  public Expense post_employee_expense(
       @PathVariable Long employee_id, @RequestBody Expense newExpense) {
     Employee employee = employeeRepository.findById(employee_id).orElseThrow();
     newExpense =
