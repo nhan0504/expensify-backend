@@ -30,4 +30,20 @@ public class EmployeeController {
     return employeeRepository.findById(employee_id).orElseThrow().getExpenses();
   }
 
+  @PostMapping("/employees/{employee_id}/expenses")
+  public Expense get_employee_expenses(
+      @PathVariable Long employee_id, @RequestBody Expense newExpense) {
+    Employee employee = employeeRepository.findById(employee_id).orElseThrow();
+    newExpense =
+        Expense.builder()
+            .merchant(newExpense.getMerchant())
+            .amount(newExpense.getAmount())
+            .description(newExpense.getDescription())
+            .purchaseDate(newExpense.getPurchaseDate())
+            .status(statusRepository.save(newExpense.getStatus()))
+            .build();
+    employee.getExpenses().add(newExpense);
+    employeeRepository.save(employee);
+    return newExpense;
+  }
 }
