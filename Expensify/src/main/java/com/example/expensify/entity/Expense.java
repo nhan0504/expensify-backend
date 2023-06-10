@@ -17,7 +17,7 @@ public class Expense {
 
   private double amount;
 
-  @OneToOne(fetch = FetchType.LAZY)
+  @OneToOne
   @JoinColumn(name = "status_id")
   private Status status;
 
