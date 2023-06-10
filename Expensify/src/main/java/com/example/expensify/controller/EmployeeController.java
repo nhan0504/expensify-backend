@@ -46,4 +46,14 @@ public class EmployeeController {
     employeeRepository.save(employee);
     return newExpense;
   }
+
+  @DeleteMapping("/employees/{employee_id}/expenses/{expense_id}")
+  public Expense delete_expense(@PathVariable Long employee_id, @PathVariable Long expense_id) {
+    Employee employee = employeeRepository.findById(employee_id).orElseThrow();
+    Expense expense = expenseRepository.findById(expense_id).orElseThrow();
+    employee.getExpenses().remove(expense);
+    employeeRepository.save(employee);
+    expenseRepository.delete(expense);
+    return expense;
+  }
 }
