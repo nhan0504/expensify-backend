@@ -31,6 +31,10 @@ public class Expense {
     this.status = builder.status;
   }
 
+  private Expense(Long id, Builder builder) {
+    new Expense(builder).id = id;
+  }
+
   public Long getId() {
     return this.id;
   }
@@ -60,6 +64,8 @@ public class Expense {
   }
 
   public static class Builder {
+    private Long id;
+
     private String merchant;
 
     private String description;
@@ -69,6 +75,11 @@ public class Expense {
     private double amount;
 
     private Status status;
+
+    public Builder id(Long id) {
+      this.id = id;
+      return this;
+    }
 
     public Builder merchant(String merchant) {
       this.merchant = merchant;
@@ -96,6 +107,9 @@ public class Expense {
     }
 
     public Expense build() {
+      if (this.id != null){
+        return new Expense(id, this);
+      }
       return new Expense(this);
     }
   }
