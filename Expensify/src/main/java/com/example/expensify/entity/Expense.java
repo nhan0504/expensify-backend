@@ -32,11 +32,6 @@ public class Expense {
     this.status = builder.status;
   }
 
-  private Expense(Long id, Builder builder) {
-    this(builder);
-    this.id = id;
-  }
-
   public Long getId() {
     return this.id;
   }
@@ -61,24 +56,11 @@ public class Expense {
     return this.status;
   }
 
-  public Expense changeStatus(Status status) {
-    return Expense.builder()
-        .id(this.id)
-        .merchant(this.merchant)
-        .amount(this.amount)
-        .description(this.description)
-        .purchaseDate(this.purchaseDate)
-        .status(this.getStatus().changeState(status.getState()))
-        .build();
-  }
-
   public static Builder builder() {
     return new Builder();
   }
 
   public static class Builder {
-
-    private Long id;
 
     private String merchant;
 
@@ -89,11 +71,6 @@ public class Expense {
     private double amount;
 
     private Status status;
-
-    public Builder id(Long id) {
-      this.id = id;
-      return this;
-    }
 
     public Builder merchant(String merchant) {
       this.merchant = merchant;
@@ -121,9 +98,6 @@ public class Expense {
     }
 
     public Expense build() {
-      if (this.id != null) {
-        return new Expense(id, this);
-      }
       return new Expense(this);
     }
   }

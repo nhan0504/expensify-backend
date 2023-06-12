@@ -19,7 +19,8 @@ public class ExpenseController {
 
   @PutMapping("/expenses/{expenseId}/status")
   public Expense reviewExpense(@RequestBody Status status, @PathVariable Long expenseId) {
-    Expense updateExpense = expenseRepository.findById(expenseId).orElseThrow().changeStatus(status);
-    return expenseRepository.save(updateExpense);
+    Expense expense = expenseRepository.findById(expenseId).orElseThrow();
+    expense.getStatus().setState(status.getState());
+    return expenseRepository.save(expense);
   }
 }
