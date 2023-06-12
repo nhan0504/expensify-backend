@@ -53,6 +53,16 @@ public class Status {
     return this.comment;
   }
 
+  public Status changeState(State state) {
+    return Status.builder()
+        .id(this.id)
+        .comment(this.comment)
+        .state(state)
+        .reviewedBy(this.reviewedBy)
+        .reviewDate(this.reviewDate)
+        .build();
+  }
+
   public static Builder builder() {
     return new Builder();
   }

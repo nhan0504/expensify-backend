@@ -60,6 +60,17 @@ public class Expense {
     return this.status;
   }
 
+  public Expense changeStatus(Status status) {
+    return Expense.builder()
+        .id(this.id)
+        .merchant(this.merchant)
+        .amount(this.amount)
+        .description(this.description)
+        .purchaseDate(this.purchaseDate)
+        .status(status)
+        .build();
+  }
+
   public static Builder builder() {
     return new Builder();
   }
@@ -108,7 +119,7 @@ public class Expense {
     }
 
     public Expense build() {
-      if (this.id != null){
+      if (this.id != null) {
         return new Expense(id, this);
       }
       return new Expense(this);

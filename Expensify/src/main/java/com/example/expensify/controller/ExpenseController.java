@@ -22,26 +22,9 @@ public class ExpenseController {
 
   @PutMapping("/expenses/{expenseId}/status")
   public Expense review_expense(@RequestBody Status status, @PathVariable Long expenseId) {
-
     Expense expense = expenseRepository.findById(expenseId).orElseThrow();
-    System.out.println(expense.getStatus().getId());
-    status =
-        Status.builder()
-            .id(expense.getStatus().getId())
-            .comment(status.getComment())
-            .state(status.getState())
-            .reviewedBy(status.getReviewedBy())
-            .reviewDate(status.getReviewDate())
-            .build();
-    expense =
-        Expense.builder()
-            .id(expenseId)
-            .merchant(expense.getMerchant())
-            .amount(expense.getAmount())
-            .description(expense.getDescription())
-            .purchaseDate(expense.getPurchaseDate())
-            .status(statusRepository.save(status))
-            .build();
+    Status newStatus = expense.getStatus().changeState(status.getState());
+    expense = expense.changeStatus(statusRepository.save(newStatus));
     return expenseRepository.save(expense);
   }
 }
