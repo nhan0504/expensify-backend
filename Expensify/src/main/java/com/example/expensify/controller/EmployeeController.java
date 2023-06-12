@@ -34,7 +34,8 @@ public class EmployeeController {
   }
 
   @DeleteMapping("/employees/{employeeId}/expenses/{expenseId}")
-  public Expense deleteExpense(@PathVariable Long employeeId, @PathVariable Long expenseId) {
+  public Expense deleteEmployeeExpense(
+      @PathVariable Long employeeId, @PathVariable Long expenseId) {
     Employee employee = employeeRepository.findById(employeeId).orElseThrow();
     Expense expense = expenseRepository.findById(expenseId).orElseThrow();
     employee.getExpenses().remove(expense);
