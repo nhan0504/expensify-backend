@@ -17,7 +17,7 @@ public class Expense {
 
   private double amount;
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "status_id")
   private Status status;
 
