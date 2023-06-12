@@ -38,7 +38,6 @@ class LoadDatabase {
       Employee employee1 = new Employee("employee1", "password", Role.ROLE_EMPLOYEE);
       employee1.getExpenses().add(expense);
       employeeRepository.save(employee1);
-      //expenseRepository.save(expense);
       employeeRepository.save(new Employee("employee2", "password", Role.ROLE_EMPLOYEE));
       employeeRepository.save(new Employee("employee3", "password", Role.ROLE_EMPLOYEE));
       reviewerRepository.save(new Reviewer("reviewer1", "password", Role.ROLE_REVIEWER));

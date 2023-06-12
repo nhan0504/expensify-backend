@@ -26,14 +26,14 @@ public class EmployeeController {
   }
 
   @GetMapping("/employees/{employee_id}/expenses")
-  public List<Expense> get_employee_expenses(@PathVariable Long employee_id) {
-    return employeeRepository.findById(employee_id).orElseThrow().getExpenses();
+  public List<Expense> get_employee_expenses(@PathVariable Long employeeId) {
+    return employeeRepository.findById(employeeId).orElseThrow().getExpenses();
   }
 
   @PostMapping("/employees/{employee_id}/expenses")
   public Expense post_employee_expense(
-      @PathVariable Long employee_id, @RequestBody Expense newExpense) {
-    Employee employee = employeeRepository.findById(employee_id).orElseThrow();
+      @PathVariable Long employeeId, @RequestBody Expense newExpense) {
+    Employee employee = employeeRepository.findById(employeeId).orElseThrow();
     newExpense =
         Expense.builder()
             .merchant(newExpense.getMerchant())
@@ -48,9 +48,9 @@ public class EmployeeController {
   }
 
   @DeleteMapping("/employees/{employee_id}/expenses/{expense_id}")
-  public Expense delete_expense(@PathVariable Long employee_id, @PathVariable Long expense_id) {
-    Employee employee = employeeRepository.findById(employee_id).orElseThrow();
-    Expense expense = expenseRepository.findById(expense_id).orElseThrow();
+  public Expense delete_expense(@PathVariable Long employeeId, @PathVariable Long expenseId) {
+    Employee employee = employeeRepository.findById(employeeId).orElseThrow();
+    Expense expense = expenseRepository.findById(expenseId).orElseThrow();
     employee.getExpenses().remove(expense);
     employeeRepository.save(employee);
     expenseRepository.delete(expense);

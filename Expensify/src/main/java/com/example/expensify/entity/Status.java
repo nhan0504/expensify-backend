@@ -29,10 +29,7 @@ public class Status {
   }
 
   private Status(Long id, Builder builder) {
-    this.state = builder.state;
-    this.reviewedBy = builder.reviewedBy;
-    this.reviewDate = builder.reviewDate;
-    this.comment = builder.comment;
+    this(builder);
     this.id = id;
   }
 

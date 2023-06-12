@@ -21,9 +21,9 @@ public class ExpenseController {
   }
 
   @PutMapping("/expenses/{expense_id}/status")
-  public Expense review_expense(@RequestBody Status status, @PathVariable Long expense_id) {
+  public Expense review_expense(@RequestBody Status status, @PathVariable Long expenseId) {
 
-    Expense expense = expenseRepository.findById(expense_id).orElseThrow();
+    Expense expense = expenseRepository.findById(expenseId).orElseThrow();
     System.out.println(expense.getStatus().getId());
     status =
         Status.builder()
@@ -35,7 +35,7 @@ public class ExpenseController {
             .build();
     expense =
         Expense.builder()
-            .id(expense_id)
+            .id(expenseId)
             .merchant(expense.getMerchant())
             .amount(expense.getAmount())
             .description(expense.getDescription())
