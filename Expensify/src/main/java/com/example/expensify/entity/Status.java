@@ -1,13 +1,13 @@
 package com.example.expensify.entity;
 
 import jakarta.persistence.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "statuses")
 public class Status {
+
   @Id @GeneratedValue private Long id;
 
   @Enumerated(EnumType.STRING)
@@ -68,6 +68,7 @@ public class Status {
   }
 
   public static class Builder {
+
     private Long id;
 
     private State state;

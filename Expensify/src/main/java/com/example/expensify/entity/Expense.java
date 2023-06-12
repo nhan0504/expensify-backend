@@ -7,6 +7,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "expenses")
 public class Expense {
+
   @Id @GeneratedValue private Long id;
 
   private String merchant;
@@ -76,6 +77,7 @@ public class Expense {
   }
 
   public static class Builder {
+
     private Long id;
 
     private String merchant;
