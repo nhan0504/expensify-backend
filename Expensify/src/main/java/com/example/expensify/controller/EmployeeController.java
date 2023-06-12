@@ -25,12 +25,12 @@ public class EmployeeController {
     this.statusRepository = statusRepository;
   }
 
-  @GetMapping("/employees/{employee_id}/expenses")
+  @GetMapping("/employees/{employeeId}/expenses")
   public List<Expense> get_employee_expenses(@PathVariable Long employeeId) {
     return employeeRepository.findById(employeeId).orElseThrow().getExpenses();
   }
 
-  @PostMapping("/employees/{employee_id}/expenses")
+  @PostMapping("/employees/{employeeId}/expenses")
   public Expense post_employee_expense(
       @PathVariable Long employeeId, @RequestBody Expense newExpense) {
     Employee employee = employeeRepository.findById(employeeId).orElseThrow();
@@ -47,7 +47,7 @@ public class EmployeeController {
     return newExpense;
   }
 
-  @DeleteMapping("/employees/{employee_id}/expenses/{expense_id}")
+  @DeleteMapping("/employees/{employeeId}/expenses/{expenseId}")
   public Expense delete_expense(@PathVariable Long employeeId, @PathVariable Long expenseId) {
     Employee employee = employeeRepository.findById(employeeId).orElseThrow();
     Expense expense = expenseRepository.findById(expenseId).orElseThrow();

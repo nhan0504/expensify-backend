@@ -20,7 +20,7 @@ public class ExpenseController {
     this.statusRepository = statusRepository;
   }
 
-  @PutMapping("/expenses/{expense_id}/status")
+  @PutMapping("/expenses/{expenseId}/status")
   public Expense review_expense(@RequestBody Status status, @PathVariable Long expenseId) {
 
     Expense expense = expenseRepository.findById(expenseId).orElseThrow();
