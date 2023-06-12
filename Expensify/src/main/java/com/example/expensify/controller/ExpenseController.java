@@ -22,7 +22,17 @@ public class ExpenseController {
 
   @PutMapping("/expenses/{expense_id}/status")
   public Expense review_expense(@RequestBody Status status, @PathVariable Long expense_id) {
+
     Expense expense = expenseRepository.findById(expense_id).orElseThrow();
+    System.out.println(expense.getStatus().getId());
+    status =
+        Status.builder()
+            .id(expense.getStatus().getId())
+            .comment(status.getComment())
+            .state(status.getState())
+            .reviewedBy(status.getReviewedBy())
+            .reviewDate(status.getReviewDate())
+            .build();
     expense =
         Expense.builder()
             .id(expense_id)

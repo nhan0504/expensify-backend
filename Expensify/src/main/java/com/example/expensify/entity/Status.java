@@ -28,6 +28,14 @@ public class Status {
     this.comment = builder.comment;
   }
 
+  private Status(Long id, Builder builder) {
+    this.state = builder.state;
+    this.reviewedBy = builder.reviewedBy;
+    this.reviewDate = builder.reviewDate;
+    this.comment = builder.comment;
+    this.id = id;
+  }
+
   public Long getId() {
     return this.id;
   }
@@ -53,6 +61,8 @@ public class Status {
   }
 
   public static class Builder {
+    private Long id;
+
     private State state;
 
     private String reviewedBy;
@@ -60,6 +70,11 @@ public class Status {
     private LocalDate reviewDate;
 
     private String comment;
+
+    public Builder id(Long id) {
+      this.id = id;
+      return this;
+    }
 
     public Builder state(State state) {
       this.state = state;
@@ -82,6 +97,9 @@ public class Status {
     }
 
     public Status build() {
+      if (id != null) {
+        return new Status(id, this);
+      }
       return new Status(this);
     }
   }

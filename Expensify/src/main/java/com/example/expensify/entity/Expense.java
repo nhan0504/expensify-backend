@@ -32,7 +32,12 @@ public class Expense {
   }
 
   private Expense(Long id, Builder builder) {
-    new Expense(builder).id = id;
+    this.merchant = builder.merchant;
+    this.description = builder.description;
+    this.purchaseDate = builder.purchaseDate;
+    this.amount = builder.amount;
+    this.status = builder.status;
+    this.id = id;
   }
 
   public Long getId() {
