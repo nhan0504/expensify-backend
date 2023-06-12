@@ -67,7 +67,7 @@ public class Expense {
         .amount(this.amount)
         .description(this.description)
         .purchaseDate(this.purchaseDate)
-        .status(status)
+        .status(this.getStatus().changeState(status.getState()))
         .build();
   }
 
