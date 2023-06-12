@@ -2,11 +2,7 @@ package com.example.expensify;
 
 import com.example.expensify.entity.*;
 import com.example.expensify.repository.EmployeeRepository;
-import com.example.expensify.repository.ExpenseRepository;
 import com.example.expensify.repository.ReviewerRepository;
-import com.example.expensify.repository.StatusRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,17 +12,12 @@ import java.time.LocalDate;
 @Configuration
 class LoadDatabase {
 
-  private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
-
   @Bean
   CommandLineRunner initDatabase(
-      EmployeeRepository employeeRepository,
-      ReviewerRepository reviewerRepository,
-      ExpenseRepository expenseRepository,
-      StatusRepository statusRepository) {
+      EmployeeRepository employeeRepository, ReviewerRepository reviewerRepository) {
 
     return args -> {
-      Status status = statusRepository.save(Status.builder().state(State.IN_REVIEW).build());
+      Status status = Status.builder().state(State.IN_REVIEW).build();
       Expense expense =
           Expense.builder()
               .merchant("merchant_1")
