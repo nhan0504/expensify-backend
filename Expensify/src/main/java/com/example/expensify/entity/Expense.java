@@ -59,6 +59,10 @@ public class Expense {
   }
 
   public void setStatus(Status status) {
+    this.status = status;
+  }
+
+  public void changeStatus(Status status) {
     this.status.setState(status.getState());
     this.status.setReviewedBy(status.getReviewedBy());
     this.status.setReviewDate(status.getReviewDate());
