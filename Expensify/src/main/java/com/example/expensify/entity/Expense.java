@@ -62,13 +62,6 @@ public class Expense {
     this.status = status;
   }
 
-  public void changeStatus(Status status) {
-    this.status.setState(status.getState());
-    this.status.setReviewedBy(status.getReviewedBy());
-    this.status.setReviewDate(status.getReviewDate());
-    this.status.setComment(status.getComment());
-  }
-
   public static Builder builder() {
     return new Builder();
   }

@@ -51,20 +51,11 @@ public class Status {
     return this.comment;
   }
 
-  public void setState(State state) {
-    this.state = state;
-  }
-
-  public void setReviewedBy(String reviewedBy) {
-    this.reviewedBy = reviewedBy;
-  }
-
-  public void setReviewDate(LocalDate reviewDate) {
-    this.reviewDate = reviewDate;
-  }
-
-  public void setComment(String comment) {
-    this.comment = comment;
+  public void changeTo(Status status) {
+    this.state = status.getState();
+    this.reviewedBy = status.getReviewedBy();
+    this.reviewDate = status.getReviewDate();
+    this.comment = status.getComment();
   }
 
   public static Builder builder() {
