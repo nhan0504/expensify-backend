@@ -33,7 +33,10 @@ public class EmployeeController {
   @PostMapping("/employees/{employeeId}/expenses")
   public Expense postEmployeeExpense(
       @PathVariable Long employeeId, @RequestBody Expense newExpense) {
-    Employee employee = employeeRepository.findById(employeeId).orElseThrow();
+    Employee employee =
+        employeeRepository
+            .findById(employeeId)
+            .orElseThrow(() -> new EmployeeNotFoundException(employeeId));
     employee.getExpenses().add(newExpense);
     employeeRepository.save(employee);
     return newExpense;
@@ -42,7 +45,10 @@ public class EmployeeController {
   @DeleteMapping("/employees/{employeeId}/expenses/{expenseId}")
   public Expense deleteEmployeeExpense(
       @PathVariable Long employeeId, @PathVariable Long expenseId) {
-    Employee employee = employeeRepository.findById(employeeId).orElseThrow();
+    Employee employee =
+        employeeRepository
+            .findById(employeeId)
+            .orElseThrow(() -> new EmployeeNotFoundException(employeeId));
     Expense expense = expenseRepository.findById(expenseId).orElseThrow();
     employee.getExpenses().remove(expense);
     employeeRepository.save(employee);

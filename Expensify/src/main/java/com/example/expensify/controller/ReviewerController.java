@@ -1,20 +1,28 @@
 package com.example.expensify.controller;
 
+import com.example.expensify.entity.Employee;
 import com.example.expensify.entity.Expense;
 import com.example.expensify.entity.Status;
+import com.example.expensify.repository.EmployeeRepository;
 import com.example.expensify.repository.ExpenseRepository;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-public class ExpenseController {
+public class ReviewerController {
 
   private final ExpenseRepository expenseRepository;
+  private final EmployeeRepository employeeRepository;
 
-  ExpenseController(ExpenseRepository expenseRepository) {
+  ReviewerController(ExpenseRepository expenseRepository, EmployeeRepository employeeRepository) {
     this.expenseRepository = expenseRepository;
+    this.employeeRepository = employeeRepository;
+  }
+
+  @GetMapping("/employees")
+  public List<Employee> getEmployees() {
+    return employeeRepository.findAll();
   }
 
   @PutMapping("/expenses/{expenseId}/status")
