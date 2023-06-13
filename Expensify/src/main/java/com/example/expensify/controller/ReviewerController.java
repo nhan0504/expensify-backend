@@ -33,7 +33,7 @@ public class ReviewerController {
         expenseRepository
             .findById(expenseId)
             .orElseThrow(() -> new ExpenseNotFoundException(expenseId));
-    expense.getStatus().setState(status.getState());
+    expense.setStatus(status);
     return expenseRepository.save(expense);
   }
 }

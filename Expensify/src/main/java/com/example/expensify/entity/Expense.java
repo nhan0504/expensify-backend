@@ -56,6 +56,8 @@ public class Expense {
     return this.status;
   }
 
+  public void setStatus(Status status) { this.status = status; }
+
   public static Builder builder() {
     return new Builder();
   }
