@@ -51,6 +51,22 @@ public class Status {
     return this.comment;
   }
 
+  public void setState(State state) {
+    this.state = state;
+  }
+
+  public void setReviewedBy(String reviewedBy) {
+    this.reviewedBy = reviewedBy;
+  }
+
+  public void setReviewDate(LocalDate reviewDate) {
+    this.reviewDate = reviewDate;
+  }
+
+  public void setComment(String comment) {
+    this.comment = comment;
+  }
+
   public static Builder builder() {
     return new Builder();
   }

@@ -49,8 +49,7 @@ public class EmployeeController {
 
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @DeleteMapping("/employees/{employeeId}/expenses/{expenseId}")
-  public void deleteEmployeeExpense(
-      @PathVariable Long employeeId, @PathVariable Long expenseId) {
+  public void deleteEmployeeExpense(@PathVariable Long employeeId, @PathVariable Long expenseId) {
     Employee employee =
         employeeRepository
             .findById(employeeId)
