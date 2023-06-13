@@ -47,8 +47,9 @@ public class EmployeeController {
     return employeeRepository.save(employee).getExpenses().get(employee.getExpenses().size() - 1);
   }
 
+  @ResponseStatus(HttpStatus.NO_CONTENT)
   @DeleteMapping("/employees/{employeeId}/expenses/{expenseId}")
-  public Expense deleteEmployeeExpense(
+  public void deleteEmployeeExpense(
       @PathVariable Long employeeId, @PathVariable Long expenseId) {
     Employee employee =
         employeeRepository
@@ -60,6 +61,5 @@ public class EmployeeController {
             .orElseThrow(() -> new ExpenseNotFoundException(expenseId));
     employee.getExpenses().remove(expense);
     employeeRepository.save(employee);
-    return expense;
   }
 }

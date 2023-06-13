@@ -7,6 +7,7 @@ import com.example.expensify.exceptionHandling.EmployeeNotFoundException;
 import com.example.expensify.exceptionHandling.ExpenseNotFoundException;
 import com.example.expensify.repository.EmployeeRepository;
 import com.example.expensify.repository.ExpenseRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,13 +28,14 @@ public class ReviewerController {
     return employeeRepository.findAll();
   }
 
+  @ResponseStatus(HttpStatus.NO_CONTENT)
   @PutMapping("/expenses/{expenseId}/status")
-  public Expense reviewExpense(@RequestBody Status status, @PathVariable Long expenseId) {
+  public void reviewExpense(@RequestBody Status status, @PathVariable Long expenseId) {
     Expense expense =
         expenseRepository
             .findById(expenseId)
             .orElseThrow(() -> new ExpenseNotFoundException(expenseId));
     expense.setStatus(status);
-    return expenseRepository.save(expense);
+    expenseRepository.save(expense);
   }
 }
