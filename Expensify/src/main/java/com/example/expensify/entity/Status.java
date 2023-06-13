@@ -1,5 +1,6 @@
 package com.example.expensify.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -13,8 +14,10 @@ public class Status {
   @Enumerated(EnumType.STRING)
   private State state;
 
+  @JsonProperty("reviewed_by")
   private String reviewedBy;
 
+  @JsonProperty("review_date")
   private LocalDate reviewDate;
 
   private String comment;

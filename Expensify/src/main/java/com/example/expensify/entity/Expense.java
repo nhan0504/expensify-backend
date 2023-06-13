@@ -1,5 +1,6 @@
 package com.example.expensify.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ public class Expense {
 
   private String description;
 
+  @JsonProperty("purchase_date")
   private LocalDate purchaseDate;
 
   private double amount;
