@@ -3,6 +3,7 @@ package com.example.expensify.controller;
 import com.example.expensify.entity.Employee;
 import com.example.expensify.entity.Expense;
 import com.example.expensify.exceptionHandling.EmployeeNotFoundException;
+import com.example.expensify.exceptionHandling.ExpenseNotFoundException;
 import com.example.expensify.repository.EmployeeRepository;
 import com.example.expensify.repository.ExpenseRepository;
 import org.springframework.http.HttpStatus;
@@ -49,7 +50,10 @@ public class EmployeeController {
         employeeRepository
             .findById(employeeId)
             .orElseThrow(() -> new EmployeeNotFoundException(employeeId));
-    Expense expense = expenseRepository.findById(expenseId).orElseThrow();
+    Expense expense =
+        expenseRepository
+            .findById(expenseId)
+            .orElseThrow(() -> new ExpenseNotFoundException(expenseId));
     employee.getExpenses().remove(expense);
     employeeRepository.save(employee);
     return expense;

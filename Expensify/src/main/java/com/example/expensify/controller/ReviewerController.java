@@ -3,6 +3,8 @@ package com.example.expensify.controller;
 import com.example.expensify.entity.Employee;
 import com.example.expensify.entity.Expense;
 import com.example.expensify.entity.Status;
+import com.example.expensify.exceptionHandling.EmployeeNotFoundException;
+import com.example.expensify.exceptionHandling.ExpenseNotFoundException;
 import com.example.expensify.repository.EmployeeRepository;
 import com.example.expensify.repository.ExpenseRepository;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +29,10 @@ public class ReviewerController {
 
   @PutMapping("/expenses/{expenseId}/status")
   public Expense reviewExpense(@RequestBody Status status, @PathVariable Long expenseId) {
-    Expense expense = expenseRepository.findById(expenseId).orElseThrow();
+    Expense expense =
+        expenseRepository
+            .findById(expenseId)
+            .orElseThrow(() -> new ExpenseNotFoundException(expenseId));
     expense.getStatus().setState(status.getState());
     return expenseRepository.save(expense);
   }
