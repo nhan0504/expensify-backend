@@ -2,7 +2,7 @@ package com.example.expensify.exceptionHandling;
 
 public class EmployeeNotFoundException extends RuntimeException {
 
-    public EmployeeNotFoundException(Long employeeId) {
-        super("Employee not found with ID " + employeeId);
-    }
+  public EmployeeNotFoundException(Long employeeId) {
+    super("Employee not found with ID " + employeeId);
+  }
 }
