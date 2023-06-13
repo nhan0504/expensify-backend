@@ -2,9 +2,12 @@ package com.example.expensify.controller;
 
 import com.example.expensify.entity.Employee;
 import com.example.expensify.entity.Expense;
+import com.example.expensify.exceptionHandling.EmployeeNotFoundException;
 import com.example.expensify.repository.EmployeeRepository;
 import com.example.expensify.repository.ExpenseRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -21,7 +24,10 @@ public class EmployeeController {
 
   @GetMapping("/employees/{employeeId}/expenses")
   public List<Expense> getEmployeeExpenses(@PathVariable Long employeeId) {
-    return employeeRepository.findById(employeeId).orElseThrow().getExpenses();
+    return employeeRepository
+        .findById(employeeId)
+        .orElseThrow(() -> new EmployeeNotFoundException(employeeId))
+        .getExpenses();
   }
 
   @PostMapping("/employees/{employeeId}/expenses")
@@ -41,10 +47,5 @@ public class EmployeeController {
     employee.getExpenses().remove(expense);
     employeeRepository.save(employee);
     return expense;
-  }
-
-  @GetMapping("/employees")
-  public List<Employee> getEmployees() {
-    return employeeRepository.findAll();
   }
 }
