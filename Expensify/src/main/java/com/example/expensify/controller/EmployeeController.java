@@ -2,6 +2,8 @@ package com.example.expensify.controller;
 
 import com.example.expensify.entity.Employee;
 import com.example.expensify.entity.Expense;
+import com.example.expensify.entity.State;
+import com.example.expensify.entity.Status;
 import com.example.expensify.exceptionHandling.EmployeeNotFoundException;
 import com.example.expensify.exceptionHandling.ExpenseNotFoundException;
 import com.example.expensify.repository.EmployeeRepository;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Stack;
 
 @RestController
 public class EmployeeController {
@@ -38,9 +41,10 @@ public class EmployeeController {
         employeeRepository
             .findById(employeeId)
             .orElseThrow(() -> new EmployeeNotFoundException(employeeId));
+    Status status = Status.builder().state(State.IN_REVIEW).build();
+    newExpense.setStatus(status);
     employee.getExpenses().add(newExpense);
-    employeeRepository.save(employee);
-    return newExpense;
+    return employeeRepository.save(employee).getExpenses().get(employee.getExpenses().size() - 1);
   }
 
   @DeleteMapping("/employees/{employeeId}/expenses/{expenseId}")
