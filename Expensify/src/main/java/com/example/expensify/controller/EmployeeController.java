@@ -35,14 +35,14 @@ public class EmployeeController {
   @PostMapping("/employees/{employeeId}/expenses")
   public Expense postEmployeeExpense(
       @PathVariable Long employeeId, @RequestBody Expense newExpense) {
+    newExpense.setStatus(Status.builder().state(State.IN_REVIEW).build());
     Employee employee =
         employeeRepository
             .findById(employeeId)
             .orElseThrow(() -> new EmployeeNotFoundException(employeeId));
-    Status status = Status.builder().state(State.IN_REVIEW).build();
-    newExpense.setStatus(status);
     employee.getExpenses().add(newExpense);
-    return employeeRepository.save(employee).getExpenses().get(employee.getExpenses().size() - 1);
+    List<Expense> list = employeeRepository.save(employee).getExpenses();
+    return list.get(list.size() - 1);
   }
 
   @ResponseStatus(HttpStatus.NO_CONTENT)
