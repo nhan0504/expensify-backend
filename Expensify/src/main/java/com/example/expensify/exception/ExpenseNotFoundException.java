@@ -1,4 +1,4 @@
-package com.example.expensify.exceptionHandling;
+package com.example.expensify.exception;
 
 public class ExpenseNotFoundException extends RuntimeException {
 

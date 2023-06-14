@@ -3,7 +3,7 @@ package com.example.expensify.controller;
 import com.example.expensify.entity.Employee;
 import com.example.expensify.entity.Expense;
 import com.example.expensify.entity.Status;
-import com.example.expensify.exceptionHandling.ExpenseNotFoundException;
+import com.example.expensify.exception.ExpenseNotFoundException;
 import com.example.expensify.repository.EmployeeRepository;
 import com.example.expensify.repository.ExpenseRepository;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ public class ReviewerController {
   private final ExpenseRepository expenseRepository;
   private final EmployeeRepository employeeRepository;
 
-  ReviewerController(ExpenseRepository expenseRepository, EmployeeRepository employeeRepository) {
+  public ReviewerController(ExpenseRepository expenseRepository, EmployeeRepository employeeRepository) {
     this.expenseRepository = expenseRepository;
     this.employeeRepository = employeeRepository;
   }

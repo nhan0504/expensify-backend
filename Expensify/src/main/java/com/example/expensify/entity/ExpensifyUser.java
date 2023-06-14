@@ -1,5 +1,6 @@
 package com.example.expensify.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,6 +16,7 @@ public abstract class ExpensifyUser implements UserDetails {
 
   private String username;
 
+  @JsonIgnore
   private String password;
 
   @Enumerated(EnumType.STRING)
@@ -33,6 +35,7 @@ public abstract class ExpensifyUser implements UserDetails {
   }
 
   @Override
+  @JsonIgnore
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return Collections.singleton(new SimpleGrantedAuthority(this.role.toString()));
   }
@@ -48,21 +51,25 @@ public abstract class ExpensifyUser implements UserDetails {
   }
 
   @Override
+  @JsonIgnore
   public boolean isAccountNonExpired() {
     return true;
   }
 
   @Override
+  @JsonIgnore
   public boolean isAccountNonLocked() {
     return true;
   }
 
   @Override
+  @JsonIgnore
   public boolean isCredentialsNonExpired() {
     return true;
   }
 
   @Override
+  @JsonIgnore
   public boolean isEnabled() {
     return true;
   }

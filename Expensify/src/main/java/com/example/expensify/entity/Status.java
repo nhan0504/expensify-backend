@@ -1,5 +1,6 @@
 package com.example.expensify.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 @Table(name = "statuses")
 public class Status {
 
+  @JsonIgnore
   @Id @GeneratedValue private Long id;
 
   @Enumerated(EnumType.STRING)

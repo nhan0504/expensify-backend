@@ -4,8 +4,8 @@ import com.example.expensify.entity.Employee;
 import com.example.expensify.entity.Expense;
 import com.example.expensify.entity.State;
 import com.example.expensify.entity.Status;
-import com.example.expensify.exceptionHandling.EmployeeNotFoundException;
-import com.example.expensify.exceptionHandling.ExpenseNotFoundException;
+import com.example.expensify.exception.EmployeeNotFoundException;
+import com.example.expensify.exception.ExpenseNotFoundException;
 import com.example.expensify.repository.EmployeeRepository;
 import com.example.expensify.repository.ExpenseRepository;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ public class EmployeeController {
   private final EmployeeRepository employeeRepository;
   private final ExpenseRepository expenseRepository;
 
-  EmployeeController(EmployeeRepository employeeRepository, ExpenseRepository expenseRepository) {
+  public EmployeeController(EmployeeRepository employeeRepository, ExpenseRepository expenseRepository) {
     this.employeeRepository = employeeRepository;
     this.expenseRepository = expenseRepository;
   }
