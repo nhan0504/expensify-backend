@@ -16,8 +16,7 @@ public abstract class ExpensifyUser implements UserDetails {
 
   private String username;
 
-  @JsonIgnore
-  private String password;
+  @JsonIgnore private String password;
 
   @Enumerated(EnumType.STRING)
   private Role role;

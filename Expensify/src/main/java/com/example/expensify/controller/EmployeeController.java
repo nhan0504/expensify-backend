@@ -19,7 +19,8 @@ public class EmployeeController {
   private final EmployeeRepository employeeRepository;
   private final ExpenseRepository expenseRepository;
 
-  public EmployeeController(EmployeeRepository employeeRepository, ExpenseRepository expenseRepository) {
+  public EmployeeController(
+      EmployeeRepository employeeRepository, ExpenseRepository expenseRepository) {
     this.employeeRepository = employeeRepository;
     this.expenseRepository = expenseRepository;
   }

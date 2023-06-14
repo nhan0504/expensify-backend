@@ -10,8 +10,7 @@ import java.time.LocalDate;
 @Table(name = "statuses")
 public class Status {
 
-  @JsonIgnore
-  @Id @GeneratedValue private Long id;
+  @JsonIgnore @Id @GeneratedValue private Long id;
 
   @Enumerated(EnumType.STRING)
   private State state;

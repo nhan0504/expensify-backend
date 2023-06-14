@@ -17,7 +17,8 @@ public class ReviewerController {
   private final ExpenseRepository expenseRepository;
   private final EmployeeRepository employeeRepository;
 
-  public ReviewerController(ExpenseRepository expenseRepository, EmployeeRepository employeeRepository) {
+  public ReviewerController(
+      ExpenseRepository expenseRepository, EmployeeRepository employeeRepository) {
     this.expenseRepository = expenseRepository;
     this.employeeRepository = employeeRepository;
   }
