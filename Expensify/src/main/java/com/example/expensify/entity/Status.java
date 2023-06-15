@@ -1,20 +1,24 @@
 package com.example.expensify.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "statuses")
 public class Status {
-  @Id @GeneratedValue private Long id;
+
+  @JsonIgnore @Id @GeneratedValue private Long id;
 
   @Enumerated(EnumType.STRING)
   private State state;
 
+  @JsonProperty("reviewed_by")
   private String reviewedBy;
 
+  @JsonProperty("review_date")
   private LocalDate reviewDate;
 
   private String comment;
@@ -48,11 +52,19 @@ public class Status {
     return this.comment;
   }
 
+  public void changeTo(Status status) {
+    this.state = status.getState();
+    this.reviewedBy = status.getReviewedBy();
+    this.reviewDate = status.getReviewDate();
+    this.comment = status.getComment();
+  }
+
   public static Builder builder() {
     return new Builder();
   }
 
   public static class Builder {
+
     private State state;
 
     private String reviewedBy;

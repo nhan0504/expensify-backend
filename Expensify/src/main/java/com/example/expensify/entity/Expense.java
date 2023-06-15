@@ -1,5 +1,6 @@
 package com.example.expensify.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -7,17 +8,19 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "expenses")
 public class Expense {
+
   @Id @GeneratedValue private Long id;
 
   private String merchant;
 
   private String description;
 
+  @JsonProperty("purchase_date")
   private LocalDate purchaseDate;
 
   private double amount;
 
-  @OneToOne(fetch = FetchType.LAZY)
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "status_id")
   private Status status;
 
@@ -55,11 +58,16 @@ public class Expense {
     return this.status;
   }
 
+  public void setStatus(Status status) {
+    this.status = status;
+  }
+
   public static Builder builder() {
     return new Builder();
   }
 
   public static class Builder {
+
     private String merchant;
 
     private String description;

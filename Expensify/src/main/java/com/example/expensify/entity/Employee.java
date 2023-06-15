@@ -9,7 +9,7 @@ import java.util.List;
 @Table(name = "employees")
 public class Employee extends ExpensifyUser {
 
-  @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Expense> expenses;
 
   protected Employee() {}
