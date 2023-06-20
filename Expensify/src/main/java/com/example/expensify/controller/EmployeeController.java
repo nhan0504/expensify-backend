@@ -9,6 +9,7 @@ import com.example.expensify.exception.ExpenseNotFoundException;
 import com.example.expensify.repository.EmployeeRepository;
 import com.example.expensify.repository.ExpenseRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class EmployeeController {
     this.expenseRepository = expenseRepository;
   }
 
+  @PreAuthorize("#employeeId == principal.getId()")
   @GetMapping("/employees/{employeeId}/expenses")
   public List<Expense> getEmployeeExpenses(@PathVariable Long employeeId) {
     return employeeRepository
