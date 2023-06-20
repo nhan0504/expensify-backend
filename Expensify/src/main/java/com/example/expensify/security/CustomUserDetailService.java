@@ -17,7 +17,8 @@ public class CustomUserDetailService implements UserDetailsService {
   private final EmployeeRepository employeeRepository;
   private final ReviewerRepository reviewerRepository;
 
-  public CustomUserDetailService(EmployeeRepository employeeRepository, ReviewerRepository reviewerRepository) {
+  public CustomUserDetailService(
+      EmployeeRepository employeeRepository, ReviewerRepository reviewerRepository) {
     this.employeeRepository = employeeRepository;
     this.reviewerRepository = reviewerRepository;
   }
@@ -26,6 +27,7 @@ public class CustomUserDetailService implements UserDetailsService {
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     Optional<Employee> employee = employeeRepository.findByUsername(username);
     if (employee.isPresent()) return employee.get();
+
     Optional<Reviewer> reviewer = reviewerRepository.findByUsername(username);
     if (reviewer.isPresent()) return reviewer.get();
 

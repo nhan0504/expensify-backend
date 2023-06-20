@@ -29,13 +29,18 @@ public class LoadDatabase {
               .purchaseDate(LocalDate.parse("2023-06-06"))
               .status(status)
               .build();
-      Employee employee1 = new Employee("employee1", passwordEncoder.encode("password"), Role.ROLE_EMPLOYEE);
+      Employee employee1 =
+          new Employee("employee1", passwordEncoder.encode("password"), Role.ROLE_EMPLOYEE);
       employee1.getExpenses().add(expense);
       employeeRepository.save(employee1);
-      employeeRepository.save(new Employee("employee2", passwordEncoder.encode("password"), Role.ROLE_EMPLOYEE));
-      employeeRepository.save(new Employee("employee3", passwordEncoder.encode("password"), Role.ROLE_EMPLOYEE));
-      reviewerRepository.save(new Reviewer("reviewer1", passwordEncoder.encode("password"), Role.ROLE_REVIEWER));
-      reviewerRepository.save(new Reviewer("reviewer2", passwordEncoder.encode("password"), Role.ROLE_REVIEWER));
+      employeeRepository.save(
+          new Employee("employee2", passwordEncoder.encode("password"), Role.ROLE_EMPLOYEE));
+      employeeRepository.save(
+          new Employee("employee3", passwordEncoder.encode("password"), Role.ROLE_EMPLOYEE));
+      reviewerRepository.save(
+          new Reviewer("reviewer1", passwordEncoder.encode("password"), Role.ROLE_REVIEWER));
+      reviewerRepository.save(
+          new Reviewer("reviewer2", passwordEncoder.encode("password"), Role.ROLE_REVIEWER));
     };
   }
 }
