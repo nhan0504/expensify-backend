@@ -43,7 +43,7 @@ public class SecurityConfiguration {
 //                    .access(
 //                        new WebExpressionAuthorizationManager("#employeeId == authentication.id"))
                     .anyRequest()
-                    .authenticated()).formLogin(Customizer.withDefaults());
+                    .authenticated()).httpBasic(Customizer.withDefaults());
     return http.build();
   }
 }
