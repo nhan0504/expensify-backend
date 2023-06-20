@@ -2,7 +2,6 @@ package com.example.expensify.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,11 +23,11 @@ public class SecurityConfiguration {
         .authorizeHttpRequests(
             authorize ->
                 authorize
-                    .requestMatchers(HttpMethod.GET, "/employees")
+                    .requestMatchers("/employees")
                     .hasRole("REVIEWER")
-                    .requestMatchers(HttpMethod.PUT, "/expenses/{expenseId}/status")
+                    .requestMatchers("/expenses/{expenseId}/status")
                     .hasRole("REVIEWER")
-                    .requestMatchers("/employees/{employeeId}/expenses")
+                    .requestMatchers("/employees/{employeeId}/expenses/**")
                     .hasRole("EMPLOYEE")
                     .anyRequest()
                     .authenticated())
