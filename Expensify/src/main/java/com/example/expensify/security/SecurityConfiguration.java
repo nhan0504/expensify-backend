@@ -40,7 +40,7 @@ public class SecurityConfiguration {
             form ->
                 form.successHandler(
                         (request, response, authentication) -> {
-                          response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                          response.setStatus(HttpServletResponse.SC_OK);
                         })
                     .failureHandler(
                         (request, response, exception) -> {
