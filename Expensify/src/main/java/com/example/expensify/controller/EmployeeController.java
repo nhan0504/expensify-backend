@@ -26,7 +26,7 @@ public class EmployeeController {
     this.expenseRepository = expenseRepository;
   }
 
-  @PreAuthorize("#employeeId == principal.getId()")
+  @PreAuthorize("#employeeId == authentication.principal.id")
   @GetMapping("/employees/{employeeId}/expenses")
   public List<Expense> getEmployeeExpenses(@PathVariable Long employeeId) {
     return employeeRepository

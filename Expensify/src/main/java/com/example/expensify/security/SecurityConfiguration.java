@@ -4,6 +4,7 @@ import com.example.expensify.entity.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,6 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
 @Configuration
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
 
   @Bean
@@ -24,8 +26,8 @@ public class SecurityConfiguration {
         .authorizeHttpRequests(
             authorize ->
                 authorize
-                    .requestMatchers("/employees")
-                    .hasAuthority(Role.ROLE_REVIEWER.toString())
+//                    .requestMatchers("/employees")
+//                    .hasAuthority(Role.ROLE_REVIEWER.toString())
                     .requestMatchers("/expenses/{expenseId}/status")
                     .hasAuthority(Role.ROLE_REVIEWER.toString())
                     .requestMatchers("/employees/{employeeId}/expenses/**")
