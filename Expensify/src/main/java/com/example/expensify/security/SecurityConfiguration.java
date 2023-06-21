@@ -1,6 +1,7 @@
 package com.example.expensify.security;
 
 import com.example.expensify.entity.Role;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -26,8 +27,8 @@ public class SecurityConfiguration {
         .authorizeHttpRequests(
             authorize ->
                 authorize
-//                    .requestMatchers("/employees")
-//                    .hasAuthority(Role.ROLE_REVIEWER.toString())
+                    .requestMatchers("/employees")
+                    .hasAuthority(Role.ROLE_REVIEWER.toString())
                     .requestMatchers("/expenses/{expenseId}/status")
                     .hasAuthority(Role.ROLE_REVIEWER.toString())
                     .requestMatchers("/employees/{employeeId}/expenses/**")
@@ -35,7 +36,16 @@ public class SecurityConfiguration {
                     .anyRequest()
                     .authenticated())
         .httpBasic(Customizer.withDefaults())
-        .formLogin(Customizer.withDefaults());
+        .formLogin(
+            form ->
+                form.successHandler(
+                        (request, response, authentication) -> {
+                          response.setStatus(HttpServletResponse.SC_OK);
+                        })
+                    .failureHandler(
+                        (request, response, exception) -> {
+                          response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                        }));
     return http.build();
   }
 }
