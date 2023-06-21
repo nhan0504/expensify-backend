@@ -1,5 +1,6 @@
 package com.example.expensify.security;
 
+import com.example.expensify.entity.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -24,11 +25,11 @@ public class SecurityConfiguration {
             authorize ->
                 authorize
                     .requestMatchers("/employees")
-                    .hasRole("REVIEWER")
+                    .hasAuthority(Role.ROLE_REVIEWER.toString())
                     .requestMatchers("/expenses/{expenseId}/status")
-                    .hasRole("REVIEWER")
+                    .hasAuthority(Role.ROLE_REVIEWER.toString())
                     .requestMatchers("/employees/{employeeId}/expenses/**")
-                    .hasRole("EMPLOYEE")
+                    .hasAuthority(Role.ROLE_EMPLOYEE.toString())
                     .anyRequest()
                     .authenticated())
         .httpBasic(Customizer.withDefaults())
