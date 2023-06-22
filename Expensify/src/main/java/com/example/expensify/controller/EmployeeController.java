@@ -9,6 +9,7 @@ import com.example.expensify.exception.ExpenseNotFoundException;
 import com.example.expensify.repository.EmployeeRepository;
 import com.example.expensify.repository.ExpenseRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class EmployeeController {
     this.expenseRepository = expenseRepository;
   }
 
+  @PreAuthorize("#employeeId == authentication.principal.id")
   @GetMapping("/employees/{employeeId}/expenses")
   public List<Expense> getEmployeeExpenses(@PathVariable Long employeeId) {
     return employeeRepository
@@ -33,6 +35,7 @@ public class EmployeeController {
         .getExpenses();
   }
 
+  @PreAuthorize("#employeeId == authentication.principal.id")
   @PostMapping("/employees/{employeeId}/expenses")
   public Expense postEmployeeExpense(
       @PathVariable Long employeeId, @RequestBody Expense newExpense) {
@@ -46,6 +49,7 @@ public class EmployeeController {
     return list.get(list.size() - 1);
   }
 
+  @PreAuthorize("#employeeId == authentication.principal.id")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @DeleteMapping("/employees/{employeeId}/expenses/{expenseId}")
   public void deleteEmployeeExpense(@PathVariable Long employeeId, @PathVariable Long expenseId) {
