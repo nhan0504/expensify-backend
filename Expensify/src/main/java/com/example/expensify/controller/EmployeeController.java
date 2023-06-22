@@ -35,6 +35,7 @@ public class EmployeeController {
         .getExpenses();
   }
 
+  @PreAuthorize("#employeeId == authentication.principal.id")
   @PostMapping("/employees/{employeeId}/expenses")
   public Expense postEmployeeExpense(
       @PathVariable Long employeeId, @RequestBody Expense newExpense) {
@@ -48,6 +49,7 @@ public class EmployeeController {
     return list.get(list.size() - 1);
   }
 
+  @PreAuthorize("#employeeId == authentication.principal.id")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @DeleteMapping("/employees/{employeeId}/expenses/{expenseId}")
   public void deleteEmployeeExpense(@PathVariable Long employeeId, @PathVariable Long expenseId) {
