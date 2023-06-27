@@ -44,6 +44,10 @@ public abstract class ExpensifyUser implements UserDetails {
     return this.password;
   }
 
+  public String getRole() {
+    return this.role.toString();
+  }
+
   @Override
   public String getUsername() {
     return this.username;

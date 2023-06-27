@@ -1,7 +1,12 @@
 package com.example.expensify.security;
 
+import com.example.expensify.entity.ExpensifyUser;
 import com.example.expensify.entity.Role;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.servlet.http.HttpServletResponse;
+;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -16,13 +21,16 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.io.PrintWriter;
 import java.util.Arrays;
 
 @EnableWebSecurity
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
+  ObjectMapper objectMapper =
+      new ObjectMapper()
+          .registerModule(new JavaTimeModule())
+          .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
   @Bean
   public BCryptPasswordEncoder passwordEncoder() {
@@ -52,16 +60,11 @@ public class SecurityConfiguration {
                           response.setStatus(HttpServletResponse.SC_OK);
                           response.setContentType("application/json");
 
-                          UserDetails principal = (UserDetails) authentication.getPrincipal();
-                          String principalDetails =
-                              String.format(
-                                  "{\"username\": \"%s\", \"authorities\": \"%s\"}",
-                                  principal.getUsername(),
-                                  principal.getAuthorities().toArray()[0].toString());
-
-                          PrintWriter out = response.getWriter();
-                          out.print(principalDetails);
-                          out.flush();
+                          ExpensifyUser expensifyUser =
+                              (ExpensifyUser) authentication.getPrincipal();
+                          response
+                              .getWriter()
+                              .write(objectMapper.writeValueAsString(expensifyUser));
                         })
                     .failureHandler(
                         (request, response, exception) -> {
@@ -74,7 +77,8 @@ public class SecurityConfiguration {
   CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
     configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-    configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
+    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+    configuration.setAllowCredentials(true);
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);
     return source;
