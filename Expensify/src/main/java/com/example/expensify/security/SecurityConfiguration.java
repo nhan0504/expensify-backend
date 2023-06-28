@@ -3,10 +3,7 @@ package com.example.expensify.security;
 import com.example.expensify.entity.ExpensifyUser;
 import com.example.expensify.entity.Role;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.servlet.http.HttpServletResponse;
-;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -15,7 +12,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -27,10 +23,7 @@ import java.util.Arrays;
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
-  ObjectMapper objectMapper =
-      new ObjectMapper()
-          .registerModule(new JavaTimeModule())
-          .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+  ObjectMapper objectMapper = new ObjectMapper();
 
   @Bean
   public BCryptPasswordEncoder passwordEncoder() {
@@ -64,7 +57,10 @@ public class SecurityConfiguration {
                               (ExpensifyUser) authentication.getPrincipal();
                           response
                               .getWriter()
-                              .write(objectMapper.writeValueAsString(expensifyUser));
+                              .write(
+                                  objectMapper
+                                      .writerFor(ExpensifyUser.class)
+                                      .writeValueAsString(expensifyUser));
                         })
                     .failureHandler(
                         (request, response, exception) -> {
