@@ -4,6 +4,7 @@ import com.example.expensify.entity.ExpensifyUser;
 import com.example.expensify.entity.Role;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -23,7 +24,7 @@ import java.util.Arrays;
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
-  ObjectMapper objectMapper = new ObjectMapper();
+    @Autowired ObjectMapper objectMapper;
 
   @Bean
   public BCryptPasswordEncoder passwordEncoder() {
