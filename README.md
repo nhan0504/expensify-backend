@@ -1,31 +1,31 @@
-# Expensify-backend
+# Expensify Backend
 
-This serves as the backend for my [Expensify web app](https://github.com/nhan0504/expensify-frontend). It exposes a set of API endpoints that the frontend uses to interact with the database. It also verifies user credentials and authorize of a user is allowed to access an API endpoint.
+This serves as the backend for my [Expensify web app](https://github.com/nhan0504/expensify-frontend). It exposes a set of API endpoints that the frontend uses to interact with the database. It also verifies user credentials and authorize if a user is allowed to access an API endpoint.
 
 # Installation
 1. Clone the GitHub repository to your local machine using the following command:
     ```bash
-    git clone https://github.com/nhan0504/expensify-frontend.git
+    git clone https://github.com/nhan0504/expensify-backend.git
     ```
 2. Navigate to the cloned repository:
    ```
-    cd expensify-frontend
+   cd expensify-backend
    ```
 3. Ensure JDK is installed and run the project which will be defaut on port 8080
    ```
    mvn spring-boot:run
    ```
 
-# Api endpoints
-[Authenticate an user](##Authenticate-an-user)    
-[Get all expenses for an employee](##Get-all-expenses-for-an-employee)    
-[Get all employees detail](##Get-all-employees-detail)    
-[Add a new expenses for an employee](##Add-a-new-expenses-for-an-employee)    
-[Delete an expense for an employee](##Delete-an-expense-for-an-employee)   
-[Update the status of an expense](##Update-the-status-of-an-expense)
+# API endpoints
+- [Authenticate a user](#authenticate-a-user)
+- [Get all expenses for an employee](#get-all-expenses-for-an-employee)
+- [Get all employees detail](#get-all-employees-detail)
+- [Add a new expenses for an employee](#add-a-new-expenses-for-an-employee)
+- [Delete an expense for an employee](#delete-an-expense-for-an-employee)
+- [Update the status of an expense](#update-the-status-of-an-expense)
 
 
-## Authenticate an user
+## Authenticate a user
 Send a POST request to the URL
 ```
 http://localhost:8080/login
@@ -38,7 +38,7 @@ with the user credential in a login form
 http://localhost:8080/employees/{employee_id}/expenses
 ```
 Calling this API endpoint will return a list of expenses for the employee with employee_id.
-```
+```json
 [
     {
         "id": 1,
@@ -61,7 +61,7 @@ Calling this API endpoint will return a list of expenses for the employee with e
 http://localhost:8080/employees
 ```
 This will list all the employee related detail for all employees
-```
+```json
 [
     {
         "id": 1,
@@ -97,7 +97,7 @@ Send a POST request to the URL
 http://localhost:8080/employees/{employee_id}/expenses
 ```
 with the body
-```
+```json
 {
     "merchant": "merchant",
     "description": "description",
@@ -117,7 +117,7 @@ Send a PUT request to the URL
 http://localhost:8080/expenses/{expense_id}/status
 ```
 with the body
-```
+```json
 {
     "state": "APPROVED",
     "reviewed_by": "reviewer",
