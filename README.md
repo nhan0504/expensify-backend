@@ -11,7 +11,16 @@ This serves as the backend for my [Expensify web app](https://github.com/nhan050
    ```
    cd expensify-backend
    ```
-3. Ensure JDK is installed and run the project which will be defaut on port 8080
+3. Create a .env file in the root directory with your PostgreSQL credential and ALLOWED_ORIGIN with the value of the URL of the frontend
+   ```
+   DB_PORT=<port>
+   DB_NAME=<database_name>
+   DB_USERNAME=<username>
+   DB_PASSWORD=<password>
+
+   ALLOWED_ORIGIN=http://127.0.0.1:3000
+   ``` 
+4. Ensure JDK is installed and run the project which will be defaut on port 8080
    ```
    mvn spring-boot:run
    ```
@@ -28,14 +37,14 @@ This serves as the backend for my [Expensify web app](https://github.com/nhan050
 ## Authenticate a user
 Send a POST request to the URL
 ```
-http://localhost:8080/login
+http://127.0.0.1:8080/login
 ```
 with the user credential in a login form
 
 ## Get all expenses for an employee
 
 ```
-http://localhost:8080/employees/{employee_id}/expenses
+http://127.0.0.1:8080/employees/{employee_id}/expenses
 ```
 Calling this API endpoint will return a list of expenses for the employee with employee_id.
 ```json
@@ -58,7 +67,7 @@ Calling this API endpoint will return a list of expenses for the employee with e
 
 ## Get all employees detail
 ```
-http://localhost:8080/employees
+http://127.0.0.1:8080/employees
 ```
 This will list all the employee related detail for all employees
 ```json
@@ -94,7 +103,7 @@ This will list all the employee related detail for all employees
 ## Add a new expenses for an employee
 Send a POST request to the URL
 ```
-http://localhost:8080/employees/{employee_id}/expenses
+http://127.0.0.1:8080/employees/{employee_id}/expenses
 ```
 with the body
 ```json
@@ -108,13 +117,13 @@ with the body
 
 ## Delete an expense for an employee
 ```
-http://localhost:8080/employees/{employee_id}/expenses/{expense_id}
+http://127.0.0.1:8080/employees/{employee_id}/expenses/{expense_id}
 ```
 
 ## Update the status of an expense
 Send a PUT request to the URL
 ```
-http://localhost:8080/expenses/{expense_id}/status
+http://127.0.0.1:8080/expenses/{expense_id}/status
 ```
 with the body
 ```json

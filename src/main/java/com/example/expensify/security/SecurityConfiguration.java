@@ -5,6 +5,7 @@ import com.example.expensify.entity.Role;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -25,6 +26,9 @@ import java.util.Arrays;
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
   @Autowired ObjectMapper objectMapper;
+
+  @Value("${ALLOWED_ORIGIN}")
+  private String allowedOrigin;
 
   @Bean
   public BCryptPasswordEncoder passwordEncoder() {
@@ -73,7 +77,7 @@ public class SecurityConfiguration {
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(Arrays.asList("http://127.0.0.1:3000"));
+    configuration.setAllowedOrigins(Arrays.asList(allowedOrigin));
     configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
     configuration.setAllowedHeaders(Arrays.asList("content-type"));
     configuration.setAllowCredentials(true);
